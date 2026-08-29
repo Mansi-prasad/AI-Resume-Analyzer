@@ -28,7 +28,7 @@ const authLimiter = rateLimit({
   legacyHeaders: false,
 
   // Use IP address to identify the client
-  keyGenerator: (req, res),
+  // keyGenerator: (req, res) => ipKeyGenerator(req, res),
 
   // Message returned when the limit is exceeded
   message: {

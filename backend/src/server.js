@@ -8,7 +8,7 @@ const { connectDB } = require("./config/db.js");
 const { notFound, errorHandler } = require("./middleware/errorHandler.js");
 
 const healthRouter = require("./routes/health.js");
-
+const authRouter = require("./routes/auth.js");
 const app = express(); // create express app
 
 // Tell Express to trust the first proxy in front of the server,  Useful when deploying behind Nginx, Render, Railway, etc.
@@ -36,6 +36,7 @@ if (!env.isProd) app.use(morgan("dev"));
 
 // the health-check routes
 app.use("/api/health", healthRouter);
+app.use("/api/auth", authRouter);
 
 // If no route matched, return a 404 error
 app.use(notFound);

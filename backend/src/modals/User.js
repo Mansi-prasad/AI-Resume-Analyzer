@@ -35,7 +35,7 @@ const userSchema = new mongoose.Schema(
 );
 
 // Hash a plain-text password
-userSchema.statics.hashPassword = function (plain) {
+userSchema.statics.passwordHash = function (plain) {
   return bcrypt.hash(plain, 12);
 };
 
