@@ -1,24 +1,38 @@
 const express = require("express");
-const { z } = require("zod");
-const mongoose = require("mongoose");
 
-const asyncHandler = require("../utils/AsyncHandler.js");
-const ApiError = require("../utils/ApiError.js");
 const { requireAuth } = require("../middleware/auth.js");
 const { validate } = require("../middleware/validate.js");
 const { uploadPdf } = require("../middleware/upload.js");
-const Resume = require("../modals/Resume.js");
-const ResumeVersion = require("../modals/ResumeVersion.js");
-const { extactText } = require("../services/pdfService.js");
+const { isParam, isVersionParam } = require("../validators/resumeValidator.js");
+
 const {
-  parseResume: parseStructured,
-} = require("../services/structuredParser.js");
+  createResume,
+  getResume,
+  getResumes,
+  getResumeVersion,
+  deleteResume,
+} = require("../controllers/resumeController.js");
 
 const router = express.Router();
 router.use(requireAuth);
 
-const objectIdSchema = z
-  .string()
-  .refine((v) => mongoose.isValidObjectId(v), { message: "Invalid id" });
+// Create a resume from an uploaded PDF. uploadPdf handles multipart/form-data  and puts the uploaded file in req.file.
+router.post("/", uploadPdf("file"), createResume);
 
-const isParam = z.object({ id: objectIdSchema });
+// Get all resumes for the current user.
+router.get("/", getResumes);
+
+// Get a single resume with its versions.
+router.get("/:id", validate(isParam, "params"), getResume);
+
+// Get a specific version of a resume.
+router.get(
+  "/:id/versions/:versionId",
+  validate(isVersionParam, "params"),
+  getResumeVersion,
+);
+
+// Delete a resume and all associated versions.
+router.delete("/:id", validate(isParam, "params"), deleteResume);
+
+module.exports = router;
