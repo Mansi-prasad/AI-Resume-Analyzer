@@ -1,12 +1,11 @@
 const ApiError = require("../utils/ApiError.js");
 
-const Resume = require("../modals/Resume.js");
-const ResumeVersion = require("../modals/ResumeVersion.js");
+const Resume = require("../models/Resume.js");
+const ResumeVersion = require("../models/ResumeVersion.js");
 
 const { extractText } = require("./pdfService.js");
-const {
-  parseResume: parseStructured,
-} = require("./structuredParser.js");
+const { parseResume: parseStructured } = require("./structuredParser.js");
+const Analysis = require("../models/Analysis.js");
 
 // Load a resume only if it belongs to the current user.
 // This is important for authorization: a user should never be able to access another user's resume just by changing the resume ID.
@@ -95,7 +94,7 @@ async function getResumes(userId) {
     .lean();
 }
 
- // Get a resume and all its versions.
+// Get a resume and all its versions.
 //  rawText is excluded from the version list because it can be large and isn't required for the listing page.
 
 async function getResumeWithVersions(resumeId, userId) {
@@ -120,10 +119,7 @@ async function getResumeVersion(resumeId, versionId, userId) {
   const resume = await loadOwnResume(resumeId, userId);
 
   // Then make sure the version belongs to that resume.
-  const version = await loadVersion(
-    resume._id,
-    versionId,
-  );
+  const version = await loadVersion(resume._id, versionId);
 
   return version;
 }
@@ -134,6 +130,9 @@ async function deleteResume(resumeId, userId) {
 
   // Delete all child versions first.
   await ResumeVersion.deleteMany({
+    resumeId: resume._id,
+  });
+  await Analysis.deleteMany({
     resumeId: resume._id,
   });
 

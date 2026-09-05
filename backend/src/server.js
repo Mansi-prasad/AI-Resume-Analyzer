@@ -10,6 +10,7 @@ const { notFound, errorHandler } = require("./middleware/errorHandler.js");
 const healthRouter = require("./routes/health.js");
 const authRouter = require("./routes/auth.js");
 const resumeRouter = require("./routes/resumes.js");
+const analysisRouter = require("./routes/analysis.js");
 
 const app = express(); // create express app
 
@@ -40,6 +41,7 @@ if (!env.isProd) app.use(morgan("dev"));
 app.use("/api/health", healthRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/resumes", resumeRouter);
+app.use("/api/resumes", analysisRouter);
 
 // If no route matched, return a 404 error
 app.use(notFound);

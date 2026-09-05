@@ -2,7 +2,7 @@ const asyncHandler = require("../utils/AsyncHandler.js");
 const ApiError = require("../utils/ApiError.js");
 const env = require("../config/env.js");
 const { signToken, cookieOptions } = require("../utils/jwt.js");
-const User = require("../modals/User.js");
+const User = require("../models/User.js");
 
 function issueSession(res, user) {
   const token = signToken({

@@ -2,7 +2,7 @@ const multer = require("multer");
 
 const ApiError = require("../utils/ApiError.js");
 
-const MAX_BYTES = 5 * 1024; // 5MB
+const MAX_BYTES = 5 * 1024 * 1024; // 5MB
 
 const upload = multer({
   storage: multer.memoryStorage(),

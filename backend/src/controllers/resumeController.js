@@ -3,6 +3,7 @@ const asyncHandler = require("../utils/AsyncHandler.js");
 const resumeService = require("../services/resumeService.js");
 
 // POST / Upload a PDF and create a new resume.
+
 const createResume = asyncHandler(async (req, res) => {
   const result = await resumeService.createResume({
     file: req.file,
@@ -14,6 +15,7 @@ const createResume = asyncHandler(async (req, res) => {
 });
 
 // GET / Get all resumes belonging to the logged-in user.
+
 const getResumes = asyncHandler(async (req, res) => {
   const resumes = await resumeService.getResumes(req.user._id);
 
@@ -23,6 +25,7 @@ const getResumes = asyncHandler(async (req, res) => {
 });
 
 // GET /:id Get one resume with its versions.
+
 const getResume = asyncHandler(async (req, res) => {
   const result = await resumeService.getResumeWithVersions(
     req.params.id,
@@ -32,8 +35,8 @@ const getResume = asyncHandler(async (req, res) => {
   res.json(result);
 });
 
-//GET /:id/versions/:versionId
-// Get one specific resume version.
+//GET /:id/versions/:versionId - Get one specific resume version.
+
 const getResumeVersion = asyncHandler(async (req, res) => {
   const version = await resumeService.getResumeVersion(
     req.params.id,

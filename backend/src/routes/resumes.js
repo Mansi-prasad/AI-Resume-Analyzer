@@ -13,6 +13,18 @@ const {
   deleteResume,
 } = require("../controllers/resumeController.js");
 
+const {
+  idParam,
+  diffQuery,
+} = require("../validators/analysisValidator.js");
+
+const { rewriteBody } = require("../validators/analysisValidator.js");
+
+const {
+  rewriteController,
+  diffController,
+} = require("../controllers/analysisController.js");
+
 const router = express.Router();
 router.use(requireAuth);
 
@@ -34,5 +46,19 @@ router.get(
 
 // Delete a resume and all associated versions.
 router.delete("/:id", validate(isParam, "params"), deleteResume);
+
+router.post(
+  "/:id/rewrite",
+  validate(idParam, "params"),
+  validate(rewriteBody),
+  rewriteController,
+);
+
+router.get(
+  "/:id/diff",
+  validate(idParam, "params"),
+  validate(diffQuery, "query"),
+  diffController,
+);
 
 module.exports = router;
