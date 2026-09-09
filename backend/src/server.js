@@ -12,6 +12,11 @@ const authRouter = require("./routes/auth.js");
 const resumeRouter = require("./routes/resumes.js");
 const analysisRouter = require("./routes/analysis.js");
 
+const dashboardRouter = require("./routes/dashboard.js");
+const insightsRouter = require("./routes/insights.js");
+const versionsRouter = require("./routes/versions.js");
+const historyRouter = require("./routes/history.js");
+
 const app = express(); // create express app
 
 // Tell Express to trust the first proxy in front of the server,  Useful when deploying behind Nginx, Render, Railway, etc.
@@ -42,6 +47,11 @@ app.use("/api/health", healthRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/resumes", resumeRouter);
 app.use("/api/resumes", analysisRouter);
+
+app.use("/api/dashboard", dashboardRouter);
+app.use("/api/insights", insightsRouter);
+app.use("/api/versions", versionsRouter);
+app.use("/api/history", historyRouter);
 
 // If no route matched, return a 404 error
 app.use(notFound);
