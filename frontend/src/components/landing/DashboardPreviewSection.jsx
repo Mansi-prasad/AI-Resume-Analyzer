@@ -23,7 +23,7 @@ export function DashboardPreviewSection() {
     >
       <SectionHeader
         eyebrow="Inside the product"
-        title={<>Every metric you'd ask for. None you wouldn't.</>}
+        title={<>Every metric you'd ask for.</>}
         sub="A real glimpse at the dashboard you'll be using in two minutes."
       />
 
@@ -73,10 +73,6 @@ export function DashboardPreviewSection() {
                   V1 → V4 over 3 weeks
                 </div>
               </div>
-              <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[rgba(143,179,156,0.16)] text-[#B6CFC0] text-[10px] font-semibold tabular">
-                <TrendingUp size={10} strokeWidth={2.5} />
-                +44 pts
-              </div>
             </div>
 
             <div className="flex items-baseline gap-2 mb-3">
@@ -118,7 +114,7 @@ export function DashboardPreviewSection() {
                     className="h-full rounded-full"
                     style={{
                       background:
-                        "linear-gradient(90deg, #8FB39C 0%, #B6CFC0 100%)",
+                         "linear-gradient(90deg, #8F3F59 0%, #ce7a96 100%)",
                     }}
                   />
                 </div>
@@ -130,7 +126,7 @@ export function DashboardPreviewSection() {
           <DarkCard className="lg:col-span-7">
             <div className="flex items-center justify-between mb-4">
               <div>
-                <div className="text-[11px] uppercase tracking-wide text-white/45 font-semibold">
+                <div className="text-[11px] uppercase tracking-wide text-white/50 font-semibold">
                   Bullet rewrite
                 </div>
                 <div className="font-display text-base font-semibold text-white mt-1">
@@ -148,7 +144,7 @@ export function DashboardPreviewSection() {
                   Original
                 </div>
                 <div className="text-[12.5px] text-white/70 leading-snug">
-                  Built dashboards for the analytics team
+                   Worked on a React website and fixed bugs.
                 </div>
               </div>
               <div className="flex justify-center text-white/30">
@@ -159,7 +155,7 @@ export function DashboardPreviewSection() {
                   Rewritten
                 </div>
                 <div className="text-[12.5px] text-white leading-snug">
-                  Shipped 4 React dashboards adopted by 12k users — cut load time 38%.
+                   Built and optimized React features, resolved 20+ bugs, and improved page performance by 30%.
                 </div>
               </div>
             </div>
@@ -283,7 +279,7 @@ function AreaChart() {
       <motion.path
         d={path}
         fill="none"
-        stroke="#B6CFC0"
+        stroke="#8f3f59"
         strokeWidth="2.5"
         strokeLinecap="round"
         initial={{ pathLength: 0 }}

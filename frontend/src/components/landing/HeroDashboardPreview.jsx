@@ -1,9 +1,5 @@
 import { motion } from "framer-motion";
 import {
-  CheckCircle2,
-  AlertCircle,
-  Sparkles,
-  ArrowRight,
   TrendingUp,
 } from "lucide-react";
 
@@ -15,7 +11,7 @@ const PCT = SCORE / 100;
 // Floating, layered mockups that compose a "live" product preview inside the dark hero card.
 export function HeroDashboardPreview() {
   return (
-    <div className="relative w-full h-[460px] sm:h-[520px]">
+    <div className="relative w-full h-[260px] sm:h-[320px]">
       {/* Main gauge card */}
       <motion.div
         initial={{ opacity: 0, y: 24 }}
@@ -76,126 +72,12 @@ export function HeroDashboardPreview() {
             <div className="text-[10px] text-white/45 mt-0.5">out of 100</div>
           </div>
         </div>
-
         <div className="mt-3 flex items-center justify-center">
           <div className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-[rgba(143,179,156,0.16)] text-[#B6CFC0] text-[10px] font-semibold tabular">
             <TrendingUp size={10} strokeWidth={2.5} />
             +18 vs V1
           </div>
         </div>
-      </motion.div>
-
-      {/* Floating: Issues card */}
-      <motion.div
-        initial={{ opacity: 0, x: -30, y: 10 }}
-        animate={{ opacity: 1, x: 0, y: 0 }}
-        transition={{ duration: 0.7, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute bottom-10 left-0 sm:-left-4 w-[230px] rounded-[18px] backdrop-blur border border-white/[0.08] p-4 overflow-hidden"
-        style={{
-          background:
-            "linear-gradient(155deg, rgba(31,42,36,0.95) 0%, rgba(22,24,29,0.95) 50%, rgba(15,17,21,0.95) 100%)",
-          boxShadow:
-            "0 24px 60px -16px rgba(0,0,0,0.7), inset 0 1px 0 0 rgba(255,255,255,0.05)",
-        }}
-      >
-        <div className="flex items-center gap-2 mb-3">
-          <div className="h-6 w-6 rounded-lg bg-[rgba(212,132,124,0.16)] text-[#D4847C] flex items-center justify-center">
-            <AlertCircle size={12} />
-          </div>
-          <div className="text-[11px] font-semibold text-white">Top issues</div>
-          <div className="ml-auto text-[10px] text-white/45 tabular">5</div>
-        </div>
-
-        {[
-          { label: "Weak action verbs", tone: "high" },
-          { label: "Missing keywords: React, AWS", tone: "med" },
-          { label: "Inconsistent dates", tone: "low" },
-        ].map((it, i) => (
-          <motion.div
-            key={it.label}
-            initial={{ opacity: 0, x: -8 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.7 + i * 0.1, duration: 0.4 }}
-            className="flex items-center gap-2 py-1.5"
-          >
-            <div
-              className="h-1.5 w-1.5 rounded-full"
-              style={{
-                background:
-                  it.tone === "high"
-                    ? "#D4847C"
-                    : it.tone === "med"
-                    ? "#D4A86A"
-                    : "#8FB39C",
-              }}
-            />
-            <div className="text-[11px] text-white/75 truncate">{it.label}</div>
-          </motion.div>
-        ))}
-      </motion.div>
-
-      {/* Floating: Rewrite card */}
-      <motion.div
-        initial={{ opacity: 0, x: 30, y: 10 }}
-        animate={{ opacity: 1, x: 0, y: 0 }}
-        transition={{ duration: 0.7, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute bottom-4 right-0 sm:-right-4 w-[260px] rounded-[18px] backdrop-blur border border-white/[0.08] p-4 overflow-hidden"
-        style={{
-          background:
-            "linear-gradient(155deg, rgba(31,42,36,0.95) 0%, rgba(22,24,29,0.95) 50%, rgba(15,17,21,0.95) 100%)",
-          boxShadow:
-            "0 24px 60px -16px rgba(0,0,0,0.7), inset 0 1px 0 0 rgba(255,255,255,0.05)",
-        }}
-      >
-        <div className="flex items-center gap-2 mb-3">
-          <div className="h-6 w-6 rounded-lg bg-[rgba(143,179,156,0.16)] text-[#B6CFC0] flex items-center justify-center">
-            <Sparkles size={12} />
-          </div>
-          <div className="text-[11px] font-semibold text-white">AI rewrite</div>
-          <div className="ml-auto inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-[rgba(143,179,156,0.16)] text-[#B6CFC0] text-[9px] font-semibold">
-            <CheckCircle2 size={9} /> improved
-          </div>
-        </div>
-
-        <div className="text-[10px] uppercase tracking-wide text-white/40 font-semibold mb-1">
-          Before
-        </div>
-        <div className="text-[11px] text-white/55 line-through leading-snug">
-          Worked on dashboards for the team
-        </div>
-        <div className="flex items-center gap-1.5 my-2 text-white/30">
-          <ArrowRight size={11} />
-          <span className="text-[9px] uppercase tracking-wide text-[#B6CFC0] font-semibold">
-            After
-          </span>
-        </div>
-        <div className="text-[11px] text-white leading-snug">
-          Shipped 4 React analytics dashboards used by 12k+ users, cutting load time 38%.
-        </div>
-      </motion.div>
-
-      {/* Floating: keyword pills */}
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute top-2 right-2 sm:right-6 flex flex-col gap-1.5 items-end"
-      >
-        {["React", "TypeScript", "AWS"].map((k, i) => (
-          <motion.div
-            key={k}
-            animate={{ y: [0, -3, 0] }}
-            transition={{
-              duration: 3 + i * 0.4,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: i * 0.3,
-            }}
-            className="px-2.5 py-1 rounded-full bg-white/8 backdrop-blur border border-white/10 text-[10px] font-semibold text-white"
-          >
-            +{k}
-          </motion.div>
-        ))}
       </motion.div>
     </div>
   );

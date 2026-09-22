@@ -1,7 +1,7 @@
 const Analysis = require("../models/Analysis.js");
 const { analyzeResume } = require("./geminiService.js");
 const { loadOwnResume, loadVersion } = require("./resumeService.js");
-const { ApiError } = require("@google/genai");
+const { ApiError } = require("../utils/ApiError.js");
 const { rewriteBody } = require("../validators/analysisValidator.js");
 
 // Analyze a resume version and save the result.
@@ -52,7 +52,7 @@ const createAnalysis = async ({ req, versionId, targetRole }) => {
 
 // Get all analyses belonging to a resume.
 const getResumeAnalyses = async (req) => {
-  const resume = await loadOwnResume(req);
+  const resume = await loadOwnResume(req.params.id, req.user._id);
 
   return Analysis.find({
     resumeId: resume._id,
@@ -63,7 +63,7 @@ const getResumeAnalyses = async (req) => {
 
 // Get the latest analysis for a particular resume version.
 const getVersionAnalysis = async (req) => {
-  const resume = await loadOwnResume(req);
+  const resume = await loadOwnResume(req.params.id, req.user._id);
 
   const version = await loadVersion(resume._id, req.params.versionId);
 
@@ -128,7 +128,6 @@ module.exports = {
   createAnalysis,
   getResumeAnalyses,
   getVersionAnalysis,
-  rewriteBody,
   looksEmpty,
   patchBulletsInSections,
   applyRewritesToText,

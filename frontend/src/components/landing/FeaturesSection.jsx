@@ -21,7 +21,7 @@ const FEATURES = [
   {
     icon: Sparkles,
     title: "AI Resume Rewrite",
-    desc: "Bullets rewritten in your voice, with quantified outcomes — not generic fluff.",
+    desc: "Bullets rewritten in your voice, with quantified outcomes",
     preview: <RewritePreview />,
   },
   {
@@ -67,20 +67,20 @@ export function FeaturesSection() {
   return (
     <section
       id="features"
-      className="relative px-3 sm:px-6 mt-18 sm:mt-36"
+      className="relative px-3 sm:px-6 mt-18 sm:mt-36 bg-[var(--bg)]"
       style={{ maxWidth: 1240, marginLeft: "auto", marginRight: "auto" }}
     >
       {/* Atmospheric sage glow behind the section header */}
       <div
         aria-hidden
-        className="absolute -top-20 left-1/2 -translate-x-1/2 w-[900px] h-[480px] pointer-events-none -z-10"
+        className="absolute -top-20 left-1/2 -translate-x-1/2 w-[900px] h-[480px] pointer-events-none z-0"
         style={{
           background:
-            "radial-gradient(ellipse at center, rgba(143,179,156,0.18) 0%, rgba(143,179,156,0.06) 35%, transparent 70%)",
+             "radial-gradient(ellipse at center, rgba(217,154,170,0.22) 0%, rgba(217,154,170,0.10) 40%, transparent 70%)",
           filter: "blur(60px)",
         }}
       />
-
+<div className="relative z-10">
       <SectionHeader
         eyebrow="Features"
         title={
@@ -90,7 +90,7 @@ export function FeaturesSection() {
             <span
               style={{
                 backgroundImage:
-                  "linear-gradient(120deg, #5B7C6A 0%, #2F4A3A 60%, #5B7C6A 100%)",
+                   "linear-gradient(120deg, #f381ab 0%, #ac4c6a 50%, #8f3f59 100%)",
                 WebkitBackgroundClip: "text",
                 backgroundClip: "text",
                 WebkitTextFillColor: "transparent",
@@ -103,6 +103,7 @@ export function FeaturesSection() {
         }
         sub="Eight surgical tools built around one workflow: upload, analyze, rewrite, ship."
       />
+      </div>
 
       <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
         {FEATURES.map((f, i) => (
@@ -114,7 +115,7 @@ export function FeaturesSection() {
             transition={{ duration: 0.5, delay: (i % 3) * 0.05 }}
             className={`group relative rounded-[22px] border border-[var(--border)] shadow-card hover:shadow-hover transition-all duration-300 overflow-hidden ${f.span || ""}`}
             style={{
-              background: "linear-gradient(180deg, #FFFFFF 0%, #FBFBF7 100%)",
+              background: "var(--surface)",
             }}
           >
             {/* Top-edge gradient highlight (inset light line) */}
@@ -133,7 +134,7 @@ export function FeaturesSection() {
               className="absolute -top-24 -right-24 w-[260px] h-[260px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
               style={{
                 background:
-                  "radial-gradient(circle, rgba(143,179,156,0.28) 0%, rgba(143,179,156,0) 65%)",
+                  "radial-gradient(circle, rgba(217,154,170,0.28) 0%, rgba(217,154,170,0) 65%)",
                 filter: "blur(20px)",
               }}
             />
@@ -143,10 +144,8 @@ export function FeaturesSection() {
                 <div
                   className="h-10 w-10 rounded-2xl flex items-center justify-center shrink-0 group-hover:scale-[1.06] transition-transform duration-300 text-[var(--accent-strong)]"
                   style={{
-                    background:
-                      "linear-gradient(135deg, #EEF5EF 0%, #D9E7DD 100%)",
-                    boxShadow:
-                      "inset 0 1px 0 0 rgba(255,255,255,0.7), 0 1px 2px rgba(47,74,58,0.06)",
+                     background: "var(--accent-soft)",
+                     boxShadow: "inset 0 1px 0 0 rgba(255,255,255,0.06), 0 1px 2px rgba(0,0,0,0.15)",                   
                   }}
                 >
                   <f.icon size={17} strokeWidth={2.25} />
@@ -269,7 +268,7 @@ function RewritePreview() {
           After
         </div>
         <div className="text-[12px] text-[var(--ink)] leading-snug">
-          Built 6 Node services handling 4.2M req/day at p99 &lt;120ms.
+          Built 6 Node services handling 4.2M req/day.
         </div>
       </div>
     </div>

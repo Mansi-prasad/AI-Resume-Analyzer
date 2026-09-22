@@ -36,7 +36,7 @@ export function CTASection() {
           <span
             style={{
               backgroundImage:
-                "linear-gradient(120deg, #B6CFC0 0%, #8FB39C 50%, #5B7C6A 100%)",
+                 "linear-gradient(120deg, #f381ab 0%, #ac4c6a 50%, #8f3f59 100%)",
               WebkitBackgroundClip: "text",
               backgroundClip: "text",
               WebkitTextFillColor: "transparent",
@@ -70,16 +70,9 @@ export function CTASection() {
             className="group relative inline-flex items-center gap-2 h-12 px-6 rounded-full font-semibold text-[14px] text-white shadow-[0_10px_30px_-8px_rgba(143,179,156,0.5)] hover:shadow-[0_14px_36px_-8px_rgba(143,179,156,0.7)] active:scale-[0.98] transition-all"
             style={{
               background:
-                "linear-gradient(135deg, #8FB39C 0%, #5B7C6A 55%, #2F4A3A 100%)",
+                "linear-gradient(135deg, #c94b73 0%, #9f4662 55%, #8f3f59 100%)",
             }}
           >
-            <span
-              className="absolute inset-0 rounded-full pointer-events-none"
-              style={{
-                background:
-                  "linear-gradient(180deg, rgba(255,255,255,0.22) 0%, transparent 50%)",
-              }}
-            />
             <span className="relative">Start free ATS analysis</span>
             <ArrowRight size={15} className="relative group-hover:translate-x-0.5 transition-transform" />
           </Link>

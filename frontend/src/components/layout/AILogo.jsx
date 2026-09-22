@@ -1,94 +1,67 @@
 import { motion } from "framer-motion";
+import { PiStarFourFill } from "react-icons/pi";
 
 const AILogo = () => {
   return (
-    <div
-      className="relative h-12 w-12 flex items-center justify-center"
-      aria-label="AI is online"
-    >
-      {/* Soft outer halo glow — breathes */}
+    <div className="relative h-12 w-12 flex items-center justify-center">
+      {/* Glow */}
       <motion.div
-        className="absolute -inset-1 rounded-[20px]"
+        className="absolute h-8 w-8 rounded-full"
         style={{
-          background:
-            "radial-gradient(circle, var(--accent) 0%, transparent 65%)",
+          background: "#8F3F59",
           filter: "blur(10px)",
         }}
-        animate={{ opacity: [0.45, 0.9, 0.45], scale: [0.85, 1.08, 0.85] }}
-        transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}
+        animate={{ opacity: [0.2, 0.45, 0.2] }}
+        transition={{ duration: 2.5, repeat: Infinity }}
       />
 
-      {/* Rotating conic gradient ring (the sweep) */}
-      <div className="absolute inset-0 rounded-[16px] overflow-hidden">
-        <motion.div
-          className="absolute -inset-1/2"
-          style={{
-            background:
-              "conic-gradient(from 0deg, #2F4A3A, #5B7C6A, #A8C4B3, #5B7C6A, #2F4A3A)",
-          }}
-          animate={{ rotate: 360 }}
-          transition={{ duration: 4.5, repeat: Infinity, ease: "linear" }}
-        />
-      </div>
+      {/* Logo shape */}
+      <div
+        className="relative h-9 w-9 rounded-[11px] flex items-center justify-center"
+        style={{
+          background: "linear-gradient(145deg, #A65370, #6F2942)",
+          boxShadow: "0 5px 12px rgba(143,63,89,0.3)",
+        }}
+      >
+        {/* Stylized R */}
+        <span
+          className="relative text-[22px] font-bold leading-none text-white"
+          style={{ fontFamily: "Arial, sans-serif" }}
+        >
+          R
+          {/* Scan line */}
+          <motion.span
+            className="absolute left-0 right-0 h-[2px] rounded-full"
+            style={{
+              background: "#F3DDE4",
+              boxShadow: "0 0 5px rgba(255,255,255,0.9)",
+            }}
+            animate={{
+              top: ["5%", "95%", "5%"],
+              opacity: [0, 1, 0],
+            }}
+            transition={{
+              duration: 2.2,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+        </span>
 
-      {/* Inner card (creates the ring frame) */}
-      <div className="relative h-[38px] w-[38px] rounded-[12px] bg-[var(--surface)] flex items-center justify-center overflow-hidden shadow-[inset_0_1px_2px_rgba(0,0,0,0.04)]">
-        {/* Soft inner gradient backdrop */}
-        <motion.div
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(circle at 30% 30%, var(--accent-soft) 0%, transparent 70%)",
-          }}
-          animate={{ opacity: [0.6, 1, 0.6] }}
-          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-        />
-
-        {/* Shimmering diamond */}
-        <motion.div
-          className="relative h-[18px] w-[18px] rounded-[4px]"
-          style={{
-            background:
-              "linear-gradient(135deg, #5B7C6A 0%, #2F4A3A 50%, #5B7C6A 100%)",
-            backgroundSize: "200% 200%",
-            rotate: 45,
-          }}
+        {/* AI sparkle */}
+        <motion.span
+          className="absolute -right-1 -top-1 text-[11px] text-white"
           animate={{
-            backgroundPosition: ["0% 0%", "100% 100%", "0% 0%"],
-            scale: [1, 1.12, 1],
-            rotate: [45, 60, 45],
-          }}
-          transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
-        />
-
-        {/* Inner highlight sparkle */}
-        <motion.div
-          className="absolute h-[3px] w-[3px] rounded-full bg-white"
-          style={{ boxShadow: "0 0 6px rgba(255,255,255,0.9)" }}
-          animate={{
-            opacity: [0, 1, 0],
-            top: ["28%", "42%", "62%"],
-            left: ["38%", "58%", "42%"],
-          }}
-          transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
-        />
-
-        {/* Tiny second sparkle, offset timing */}
-        <motion.div
-          className="absolute h-[2px] w-[2px] rounded-full bg-white"
-          style={{ boxShadow: "0 0 4px rgba(255,255,255,0.8)" }}
-          animate={{
-            opacity: [0, 1, 0],
-            top: ["58%", "30%", "60%"],
-            left: ["62%", "40%", "30%"],
+            opacity: [0.4, 1, 0.4],
+            scale: [0.8, 1.15, 0.8],
           }}
           transition={{
-            duration: 2.2,
+            duration: 1.8,
             repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1.1,
           }}
-        />
+        >
+          <PiStarFourFill />
+        </motion.span>
       </div>
     </div>
   );

@@ -10,8 +10,8 @@ export function DarkPanel({ className = "", children, glow = true, radius = "rou
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(140deg, #18271F 0%, #2F4A3A 38%, #1A2B22 72%, #0E1812 100%)",
-        }}
+            "linear-gradient( 140deg,  #0a615f 0%, #0b5e58 38%, rgb(14, 94, 88) 72%,  #105352 100%)"
+}}
       />
 
       {glow && (
@@ -22,32 +22,26 @@ export function DarkPanel({ className = "", children, glow = true, radius = "rou
               background:
                 "radial-gradient(circle, rgba(168,196,179,0.45) 0%, transparent 70%)",
               filter: "blur(60px)",
-            }}
-            animate={{ x: [0, 30, 0], y: [0, 20, 0], opacity: [0.45, 0.7, 0.45] }}
-            transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+            }}            
           />
           <motion.div
             className="absolute -bottom-40 -left-32 w-[460px] h-[460px] rounded-full pointer-events-none"
             style={{
               background:
-                "radial-gradient(circle, rgba(91,124,106,0.55) 0%, transparent 70%)",
+                "radial-gradient(circle, rgba(232,156,184,0.42) 0%, transparent 70%)",
               filter: "blur(60px)",
-            }}
-            animate={{ x: [0, -25, 0], y: [0, -30, 0], opacity: [0.4, 0.65, 0.4] }}
-            transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+            }}            
           />
         </>
       )}
 
-      <motion.div
+      <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
             "linear-gradient(135deg, transparent 30%, rgba(255,255,255,0.05) 50%, transparent 70%)",
           backgroundSize: "200% 200%",
         }}
-        animate={{ backgroundPosition: ["0% 0%", "100% 100%"] }}
-        transition={{ duration: 9, repeat: Infinity, ease: "linear" }}
       />
 
       <div

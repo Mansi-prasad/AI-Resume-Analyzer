@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "http://localhost:5000",
+    "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
     }

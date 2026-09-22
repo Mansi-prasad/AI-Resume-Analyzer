@@ -27,7 +27,7 @@ function BrandPanel({ headline, subhead }) {
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(140deg, #18271F 0%, #2F4A3A 38%, #1A2B22 72%, #0E1812 100%)",
+            "linear-gradient( 140deg,  #0a615f 0%, #0b5e58 38%, rgb(14, 94, 88) 72%,  #105352 100%)"
         }}
       />
 
@@ -98,7 +98,7 @@ function BrandPanel({ headline, subhead }) {
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/8 border border-white/10 backdrop-blur-md">
             <Sparkles size={12} className="text-white/80" />
             <span className="text-[11px] tracking-wide text-white/80 uppercase font-semibold">
-              AI Resume Roaster
+              AI Resume Scan
             </span>
           </div>
 

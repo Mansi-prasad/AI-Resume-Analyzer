@@ -187,7 +187,7 @@ export function HowItWorks() {
       <SectionHeader
         eyebrow="How it works"
         title={<>From upload to interview-ready in&nbsp;3 steps.</>}
-        sub="No prompt engineering. No ten-step funnels. Drop, analyze, ship."
+        sub="No prompt engineering. No ten-step funnels. Just Drop and analyze."
       />
 
       <div className="mt-16 relative grid grid-cols-1 lg:grid-cols-3 gap-5">
@@ -244,30 +244,14 @@ export function HowItWorks() {
                     opacity: 0.5,
                   }}
                 />
-
-                {/* Massive ghost number */}
-                <div
-                  className="absolute -top-2 right-3 font-display text-[140px] font-bold leading-none tracking-tighter select-none pointer-events-none"
-                  style={{
-                    backgroundImage:
-                      "linear-gradient(180deg, var(--accent-soft) 0%, transparent 75%)",
-                    WebkitBackgroundClip: "text",
-                    backgroundClip: "text",
-                    color: "transparent",
-                    WebkitTextFillColor: "transparent",
-                  }}
-                  aria-hidden
-                >
-                  {s.n}
-                </div>
-
+<div className="relative flex items-start justify-between">
                 {/* Step pill */}
-                <div className="relative inline-flex items-center gap-1.5 h-6 px-2.5 rounded-full bg-[var(--accent-soft)] text-[var(--accent-strong)] text-[10px] font-semibold uppercase tracking-wider">
+                <div className="inline-flex items-center gap-1.5 h-6 px-2.5 rounded-full bg-[var(--accent-soft)] text-[var(--accent-strong)] text-[10px] font-semibold uppercase tracking-wider">
                   Step {s.n}
                 </div>
 
                 {/* Icon with soft glow */}
-                <div className="relative mt-6 inline-block">
+                <div className="relative inline-block">
                   <div className="absolute -inset-2 rounded-3xl bg-[var(--accent-soft)] blur-lg opacity-70" />
                   <div
                     className="relative h-14 w-14 rounded-2xl flex items-center justify-center text-white shadow-card"
@@ -278,6 +262,8 @@ export function HowItWorks() {
                   >
                     <Icon size={22} strokeWidth={2} />
                   </div>
+                </div>
+
                 </div>
 
                 {/* Title */}

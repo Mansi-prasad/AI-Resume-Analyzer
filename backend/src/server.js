@@ -25,7 +25,7 @@ app.set("trust proxy", 1);
 // Enable CORS so the frontend can communicate with this backend
 app.use(
   cors({
-    origin: true, // Allow requests from the requesting origin
+    origin: env.clientOrigins, // Allow requests from the requesting origin
     credentials: true, // Allow cookies/authentication credentials
   }),
 );

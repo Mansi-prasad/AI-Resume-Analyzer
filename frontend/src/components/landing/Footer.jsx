@@ -65,7 +65,7 @@ const COLUMNS = [
 export function Footer() {
   return (
     <footer
-      className="px-3 sm:px-6 mt-28 sm:mt-18 pb-12"
+      className="px-3 sm:px-2 pt-20 sm:pt-4 pb-4 mt-10"
       style={{ maxWidth: 1240, marginLeft: "auto", marginRight: "auto" }}
     >
       <div className="rounded-[28px] bg-[var(--surface)] border border-[var(--border)] shadow-card p-8 sm:p-12">
@@ -74,12 +74,11 @@ export function Footer() {
             <Link to="/" className="flex items-center gap-2.5">
               <AILogo />
               <span className="font-display text-[16px] font-semibold tracking-tight text-[var(--ink)]">
-                Resume Roaster
+                Resume Scan
               </span>
             </Link>
             <p className="text-[13px] text-[var(--ink-muted)] mt-4 max-w-xs leading-relaxed">
-              AI-powered ATS scoring and resume rewrites — built for engineers who'd
-              rather ship than polish.
+              AI-powered resume analysis, ATS scoring, and smart suggestions - so you can build a resume that gets noticed.
             </p>
             <div className="flex items-center gap-2 mt-5">
               {[GithubIcon, TwitterIcon, LinkedinIcon].map((Icon, i) => (
@@ -116,7 +115,7 @@ export function Footer() {
         </div>
 
         <div className="mt-10 pt-6 border-t border-[var(--border)] flex flex-col sm:flex-row items-center justify-between gap-3 text-[12px] text-[var(--ink-muted)]">
-          <div>© 2026 Resume Roaster. All rights reserved.</div>
+          <div>© 2026 Resume Scan. All rights reserved.</div>
           <div className="flex items-center gap-1.5">
             <span className="h-1.5 w-1.5 rounded-full bg-[var(--success)] animate-pulse" />
             All systems operational

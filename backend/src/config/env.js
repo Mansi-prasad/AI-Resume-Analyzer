@@ -12,6 +12,7 @@ if (missing.length) {
 
 module.exports = {
   nodeEnv: process.env.NODE_ENV || "development",
+  clientOrigins: process.env.clientOrigins || "http://localhost:5173",
   port: process.env.PORT || 5000,
   mongoUri: process.env.MONGO_URI,
   jwtSecret: process.env.JWT_SECRET,

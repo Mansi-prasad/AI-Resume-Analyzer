@@ -2,7 +2,7 @@ const { GoogleGenAI, Type } = require("@google/genai");
 const { z } = require("zod");
 
 const env = require("../config/env.js");
-const ApiError = require("../utils/ApiError.js");
+const { ApiError } = require("../utils/ApiError.js");
 
 const ai = env.geminiApiKey
   ? new GoogleGenAI({ apiKey: env.geminiApiKey })

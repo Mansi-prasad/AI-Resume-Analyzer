@@ -16,7 +16,7 @@ const getDashboard = asyncHandler(async (req, res) => {
       resumeId: { $in: resumeIds },
       sourceType: "rewrite",
     }),
-    Analysis.countDouments({ userId }),
+    Analysis.countDocuments({ userId }),
   ]);
 
   const latestResumeMeta = resumes[0] || null;
@@ -42,7 +42,7 @@ const getDashboard = asyncHandler(async (req, res) => {
       analyses.map((a) => [a.versionId.toString(), a.atsScore]),
     );
 
-    const versionsWithScores = version.map((v) => ({
+    const versionsWithScores = versions.map((v) => ({
       id: v._id,
       label: v.label,
       versionNumber: v.versionNumber,
@@ -149,7 +149,7 @@ const getDashboard = asyncHandler(async (req, res) => {
       delta:
         latestAnalysis && prevAnalysis
           ? (latestAnalysis.keywordsPresent?.length || 0) -
-            (latestAnalysis.keywordsPresent?.length || 0)
+            (prevAnalysis.keywordsPresent?.length || 0)
           : null,
       spark: keywordsSpark,
     },
@@ -174,7 +174,7 @@ const getDashboard = asyncHandler(async (req, res) => {
 
   for (const r of resumes.slice(0, 10)) {
     events.push({
-      id: `r-$(r._id)`,
+      id: `r-${r._id}`,
       type: "upload",
       title: `${r.title} uploaded`,
       subtitle: "Parsed and version V1 created",

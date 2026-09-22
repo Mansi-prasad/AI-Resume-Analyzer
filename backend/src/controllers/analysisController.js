@@ -1,5 +1,5 @@
 const asyncHandler = require("../utils/AsyncHandler.js");
-
+const Analysis = require("../models/Analysis.js");
 const {
   createAnalysis,
   getResumeAnalyses,
@@ -65,7 +65,7 @@ const rewriteController = asyncHandler(async (req, res) => {
     throw ApiError.badRequest("No rewrites selected to apply");
   }
 
-  const newRaw = applyRewritesToText(baseVersion, rawText, selected);
+  const newRaw = applyRewritesToText(baseVersion.rawText, selected);
 
   // safety net: pre-build a structured copy from the base version with the choosen bullets swapped in, so v2 never lands with empty sections even if gemini's reparse fails
 

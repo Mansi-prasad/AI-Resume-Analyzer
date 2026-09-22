@@ -22,7 +22,7 @@ export default function Landing() {
   return (
     <div className="min-h-screen bg-[var(--bg)] text-[var(--ink)] overflow-x-hidden">
       <Navbar />
-      <main style={{ background: "white" }}>
+      <main style={{ background: "var(--bg)" }}>
         <HeroSection />
         <FeaturesSection />
         <HowItWorks />

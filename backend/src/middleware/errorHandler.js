@@ -26,14 +26,14 @@ function errorHandler(err, req, res, next) {
     status = 409;
     message = "Duplicate key";
     details = err.keyValue;
-  } else if (err.name === "zoderror") {
+  } else if (err.name === "ZodError") {
     status = 400;
-    message = "validation filed";
+    message = "validation failed";
     details = err.issues;
   }
 
   if (status >= 500) {
-    console.error(`[${req.method} ${req.originUrl}]`, err);
+    console.error(`[${req.method} ${req.originalUrl}]`, err);
   }
   res.status(status).json({
     error: {

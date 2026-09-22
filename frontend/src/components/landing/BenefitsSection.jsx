@@ -11,23 +11,23 @@ import { SectionHeader } from "./FeaturesSection";
 const BENEFITS = [
   {
     icon: PhoneCall,
-    title: "3.2× more callbacks",
-    desc: "Users hit interview rates that matched their target roles, not their fears.",
+    title: "Get more interview calls",
+    desc: "Improve your resume that helps you get noticed and reach more interviews.",
   },
   {
     icon: ShieldCheck,
-    title: "Parsed by every ATS",
-    desc: "Greenhouse, Lever, Workday — your resume now reads cleanly to all of them.",
+    title: "Make your resume ATS-friendly",
+    desc: "Check your resume for common ATS issues and make it easier for hiring systems to read.",
   },
   {
     icon: Sparkles,
     title: "Bullets that brag, not bore",
-    desc: "Quantified outcomes, strong verbs, and your voice — never the AI's.",
+    desc: "Turn simple job descriptions into clear, strong, and results-focused bullet points.",
   },
   {
     icon: Zap,
-    title: "Apply in minutes, not weeks",
-    desc: "Tailor your resume to a JD in under 60 seconds. Then apply to 20 jobs by lunch.",
+    title: "Customize your resume quickly",
+    desc: "Match your resume with a job description in minutes instead of rewriting everything yourself.",
   },
   {
     icon: Search,

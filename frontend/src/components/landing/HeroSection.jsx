@@ -12,7 +12,7 @@ export function HeroSection() {
         radius="rounded-b-[40px] sm:rounded-b-[56px]"
       >
         <div
-          className="grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] gap-12 lg:gap-10 items-center px-6 sm:px-10 lg:px-16 pt-32 sm:pt-36 lg:pt-40 pb-16 lg:pb-24"
+          className="grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] gap-12 lg:gap-10 items-center px-6 sm:px-10 lg:px-16 pt-32 sm:pt-26 lg:pt-36 pb-12 lg:pb-22"
           style={{ maxWidth: 1280, marginLeft: "auto", marginRight: "auto" }}
         >
           {/* Copy */}
@@ -37,11 +37,11 @@ export function HeroSection() {
             >
               Beat the ATS.
               <br />
-              <span className="text-white/50">Land more</span>{" "}
+              <span className="text-gray-200">Land more</span>{" "}
               <span
                 style={{
-                  backgroundImage:
-                    "linear-gradient(120deg, #B6CFC0 0%, #8FB39C 55%, #5B7C6A 100%)",
+                  backgroundImage:             
+                  "linear-gradient(120deg, #f381ab 0%, #ac4c6a 50%, #8f3f59 100%)",
                   WebkitBackgroundClip: "text",
                   backgroundClip: "text",
                   WebkitTextFillColor: "transparent",
@@ -59,7 +59,7 @@ export function HeroSection() {
               className="text-white/65 text-base sm:text-lg lg:text-[19px] mt-6 max-w-[540px] leading-relaxed"
             >
               Upload your resume. Get an instant ATS score, fixable issues, and AI-rewritten bullets
-              that actually sound like you — built for engineers, by engineers.
+              that actually sound like you.
             </motion.p>
 
             <motion.div
@@ -73,16 +73,9 @@ export function HeroSection() {
                 className="group relative inline-flex items-center gap-2 h-12 px-5 rounded-full font-semibold text-[14px] text-white shadow-[0_10px_30px_-8px_rgba(143,179,156,0.5)] transition-all hover:shadow-[0_14px_36px_-8px_rgba(143,179,156,0.7)] active:scale-[0.98]"
                 style={{
                   background:
-                    "linear-gradient(135deg, #8FB39C 0%, #5B7C6A 55%, #2F4A3A 100%)",
+                    "linear-gradient(135deg, #c94b73 0%, #9f4662 55%, #8f3f59 100%)",
                 }}
               >
-                <span
-                  className="absolute inset-0 rounded-full pointer-events-none"
-                  style={{
-                    background:
-                      "linear-gradient(180deg, rgba(255,255,255,0.22) 0%, transparent 50%)",
-                  }}
-                />
                 <span className="relative">Upload your resume</span>
                 <ArrowRight size={15} className="relative group-hover:translate-x-0.5 transition-transform" />
               </Link>
