@@ -6,13 +6,12 @@ const requiredEnvVars = ["MONGO_URI", "JWT_SECRET"];
 
 const missing = requiredEnvVars.filter((key) => !process.env[key]);
 if (missing.length) {
-  console.error(`Missing required env vars: ${missing.join(", ")}`);
+  console.error(`Missing required environment variables: ${missing.join(", ")}`);
   process.exit(1);
 }
 
 module.exports = {
   nodeEnv: process.env.NODE_ENV || "development",
-  clientOrigins: process.env.clientOrigins || "http://localhost:5173",
   port: process.env.PORT || 5000,
   mongoUri: process.env.MONGO_URI,
   jwtSecret: process.env.JWT_SECRET,

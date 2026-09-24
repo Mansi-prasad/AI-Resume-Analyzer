@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import {
-  TrendingUp,
   Sparkles,
   ArrowRight,
   AlertCircle,

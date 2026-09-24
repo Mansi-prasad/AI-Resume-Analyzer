@@ -8,6 +8,10 @@ const ai = env.geminiApiKey
   ? new GoogleGenAI({ apiKey: env.geminiApiKey })
   : null;
 
+if (!ai) {
+  throw ApiError.internal("GEMINI_API_KEY is not configured on the server.");
+}
+
 const responseSchema = {
   type: Type.OBJECT,
   required: [

@@ -7,7 +7,6 @@ import {
   GitCompare,
   LineChart,
   FileDown,
-  Zap,
 } from "lucide-react";
 
 const FEATURES = [

@@ -4,7 +4,6 @@ import Dashboard from "@/pages/Dashboard";
 import Login from "@/pages/Login";
 import Register from "@/pages/Register";
 import Landing from "@/pages/Landing";
-import { Placeholder } from "@/pages/Placeholder";
 import Resumes from "@/pages/Resumes";
 import ResumeDetail from "@/pages/ResumeDetail";
 import ExportPage from "@/pages/Export";
