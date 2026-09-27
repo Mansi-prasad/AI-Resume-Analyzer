@@ -1,4 +1,4 @@
-const { rateLimit, ipkeyGenerator } = require("express-rate-limit");
+const { rateLimit, ipKeyGenerator } = require("express-rate-limit");
 
 const analyzeLimiter = rateLimit({
   windowMs: 60 * 1000, // 1 minute
@@ -9,8 +9,8 @@ const analyzeLimiter = rateLimit({
   legacyHeaders: false,
 
   // Use user ID when logged in, otherwise use IP address
-  keyGenerator: (req, res) =>
-    req.user?._id?.toString() || ipkeyGenerator(req, res),
+  keyGenerator: (req) =>
+    req.user?._id?.toString() || ipKeyGenerator(req.ip),
 
   // Message returned when the limit is exceeded
   message: {

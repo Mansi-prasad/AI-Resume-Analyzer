@@ -45,7 +45,7 @@ async function createResume({ file, title, userId }) {
   const { text, meta } = await extractText(file.buffer);
 
   // Convert raw text into structured resume sections.
-  const parsedSection = await parseStructured(text);
+  const parsedSections = await parseStructured(text);
 
   // Use the provided title if available.
   // Otherwise use the PDF filename.
@@ -68,7 +68,7 @@ async function createResume({ file, title, userId }) {
     versionNumber: 1,
     label: "V1",
     rawText: text,
-    parsedSection,
+    parsedSections,
     sourceType: "upload",
     parentVersionId: null,
   });

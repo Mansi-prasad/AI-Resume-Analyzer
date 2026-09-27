@@ -1,5 +1,8 @@
 const asyncHandler = require("../utils/AsyncHandler.js");
 const Analysis = require("../models/Analysis.js");
+const ResumeVersion = require("../models/ResumeVersion.js");
+const ApiError = require("../utils/ApiError.js");
+const { parseResume: parseStructured } = require("../services/structuredParser.js");
 const {
   createAnalysis,
   getResumeAnalyses,
@@ -8,6 +11,7 @@ const {
   patchBulletsInSections,
   applyRewritesToText,
 } = require("../services/analysisService.js");
+const { loadOwnResume, loadVersion } = require("../services/resumeService.js");
 const { diffText, summarize } = require("../services/diffService.js");
 
 // POST /resumes/:id/analyze
@@ -45,7 +49,7 @@ const getVersionAnalysisController = asyncHandler(async (req, res) => {
 });
 
 const rewriteController = asyncHandler(async (req, res) => {
-  const resume = await loadOwnResume(req);
+  const resume = await loadOwnResume(req.params.id, req.user._id);
 
   const analysis = await Analysis.findOne({
     _id: req.body.analysisId,
@@ -66,8 +70,6 @@ const rewriteController = asyncHandler(async (req, res) => {
   }
 
   const newRaw = applyRewritesToText(baseVersion.rawText, selected);
-
-  // safety net: pre-build a structured copy from the base version with the choosen bullets swapped in, so v2 never lands with empty sections even if gemini's reparse fails
 
   const patchedFromBase = patchBulletsInSections(
     baseVersion.parsedSections,
@@ -102,7 +104,7 @@ const rewriteController = asyncHandler(async (req, res) => {
 });
 
 const diffController = asyncHandler(async (req, res) => {
-  const resume = await loadOwnResume(req);
+  const resume = await loadOwnResume(req.params.id, req.user._id);
   const [fromV, toV] = await Promise.all([
     loadVersion(resume._id, req.query.from),
     loadVersion(resume._id, req.query.to),
@@ -116,11 +118,16 @@ const diffController = asyncHandler(async (req, res) => {
       label: fromV.label,
       versionNumber: fromV.versionNumber,
     },
-    to: {},
+    to: {
+      id: toV._id,
+      label: toV.label,
+      versionNumber: toV.versionNumber,
+    },
     parts,
     stats: summarize(parts),
   });
 });
+
 module.exports = {
   analyzeResumeController,
   getAnalysesController,

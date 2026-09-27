@@ -8,7 +8,7 @@ const getEvents = asyncHandler(async (req, res) => {
 
   const resumes = await Resume.find({ userId }).lean();
   const resumeIds = resumes.map((r) => r._id);
-  const resumeMap = new Map(resumes.map((r) => [r, _id.toString(), r]));
+  const resumeMap = new Map(resumes.map((r) => [r._id.toString(), r]));
 
   const [versions, analyses] = await Promise.all([
     ResumeVersion.find({ resumeId: { $in: resumeIds } })
@@ -51,7 +51,7 @@ const getEvents = asyncHandler(async (req, res) => {
   }
 
   for (const a of analyses) {
-    const resume = resumeMap.get(v.resumeId.toString());
+    const resume = resumeMap.get(a.resumeId.toString());
 
     events.push({
       id: `a-${a._id}`,

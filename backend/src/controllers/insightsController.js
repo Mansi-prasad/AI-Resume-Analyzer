@@ -4,7 +4,7 @@ const Resume = require("../models/Resume.js");
 const Analysis = require("../models/Analysis.js");
 
 
-function topN(items, getkey, n = 8) {
+function topN(items, getKey, n = 8) {
   const counts = new Map();
   const extra = new Map();
   for (const item of items) {
@@ -48,6 +48,8 @@ const getInsights = asyncHandler(async (req, res) => {
 
   const averageScore = Math.round(totalScore / analyses.length);
 
+  const resumeMap = new Map(resumes.map((r) => [r._id.toString(), r]));
+
   const bestEmpty = analyses.reduce((best, a) =>
     a.atsScore > best.atsScore ? a : best,
   );
@@ -71,7 +73,7 @@ const getInsights = asyncHandler(async (req, res) => {
   ).map((row) => ({
     title: row.sample?.title || row.key,
     count: row.count,
-    serverity: row.sample?.serverity || "medium",
+    severity: row.sample?.severity || "medium",
   }));
 
   // keyword frequency

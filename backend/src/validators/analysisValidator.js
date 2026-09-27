@@ -19,7 +19,7 @@ const versionAnalysisParams = z.object({
 const diffQuery = z.object({
   from: objectIdSchema,
   to: objectIdSchema,
-  model: z.enum(["words", "lines"]).optional(),
+  mode: z.enum(["words", "lines"]).optional(),
 });
 
 const rewriteBody = z.object({

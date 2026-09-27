@@ -318,7 +318,7 @@ function shortenUrl(url) {
 }
 
 export function ResumeDocument({ user, version, title }) {
-  const p = version?.parsedSections || {};
+  const p = version?.parsedSections || version?.parsedSection || {};
   const basics = p.basics || {};
 
   const displayName = basics.name?.trim() || user?.name || "Your Name";

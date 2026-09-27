@@ -6,7 +6,7 @@ const User = require("../models/User.js");
 async function requireAuth(req, res, next) {
   try {
     const token = req.cookies?.[env.cookieName];
-    if (!token) throw ApiError.unauthorized;
+    if (!token) throw ApiError.unauthorized();
 
     const payload = verifyToken(token);
     const user = await User.findById(payload.sub);

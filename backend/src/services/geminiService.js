@@ -1,16 +1,13 @@
-const { GoogleGenAI, Type } = require("@google/genai");
+const { Type } = require("@google/genai");
 const { z } = require("zod");
 
 const env = require("../config/env.js");
-const { ApiError } = require("../utils/ApiError.js");
-
-const ai = env.geminiApiKey
-  ? new GoogleGenAI({ apiKey: env.geminiApiKey })
-  : null;
-
-if (!ai) {
-  throw ApiError.internal("GEMINI_API_KEY is not configured on the server.");
-}
+const ApiError = require("../utils/ApiError.js");
+const {
+  ai,
+  generateContent,
+  isCapacityError,
+} = require("./geminiClient.js");
 
 const responseSchema = {
   type: Type.OBJECT,
@@ -123,8 +120,8 @@ const analysisValidator = z.object({
       }),
     )
     .default([]),
-  keywordsMissing: z.array(z.string().default([])),
-  keywordsPresent: z.array(z.string().default([])),
+  keywordsMissing: z.array(z.string()).default([]),
+  keywordsPresent: z.array(z.string()).default([]),
   summary: z.string(),
 });
 
@@ -148,50 +145,41 @@ function buildPrompt({ rawText, targetRole }) {
   ].join("\n");
 }
 
-async function callGemini(prompt) {
-  const result = await ai.models.generateContent({
-    model: env.geminiModel,
-    contents: [{ role: "user", parts: [{ text: prompt }] }],
-    config: {
-      responseMimeType: "application/json",
-      responseSchema,
-      temperature: 0.4,
-    },
-  });
-  const text = typeof result.text == "function" ? result.text() : result.text;
-  if (!text) throw new Error("Empty response from Gemini");
-
-  return { text, usage: result.usageMetadata || {} };
-}
-
 async function analyzeResume({ rawText, targetRole }) {
   if (!ai) {
     throw ApiError.internal("GEMINI_API_KEY is not configured on the server.");
   }
   const prompt = buildPrompt({ rawText, targetRole });
 
-  let lastErr;
+  try {
+    const { text, usage, model } = await generateContent({
+      contents: [{ role: "user", parts: [{ text: prompt }] }],
+      config: {
+        responseMimeType: "application/json",
+        responseSchema,
+        temperature: 0.4,
+      },
+    });
+    const parsed = JSON.parse(text);
+    const validated = analysisValidator.parse(parsed);
 
-  for (let attempt = 1; attempt <= 2; attempt++) {
-    try {
-      const { text, usage } = await callGemini(prompt);
-      const parsed = JSON.parse(text);
-      const validated = analysisValidator.parse(parsed);
-
-      return {
-        analysis: validated,
-        model: env.geminiModel,
-        promptTokens: usage.promptTokenCount,
-        responseTokens: usage.candidatesTokenCount,
-      };
-    } catch (error) {
-      lastErr = error;
-      if (attempt === 2) break;
+    return {
+      analysis: validated,
+      model,
+      promptTokens: usage.promptTokenCount,
+      responseTokens: usage.candidatesTokenCount,
+    };
+  } catch (error) {
+    if (isCapacityError(error) || error.isCapacity) {
+      throw new ApiError(
+        503,
+        "Gemini is busy right now. Wait a few seconds and try Analyze again.",
+      );
     }
+    throw ApiError.internal(
+      `Gemini analysis failed: ${error?.message || "unknown error"}`,
+    );
   }
-  throw ApiError.internal(
-    `Gemini analysis failed: ${lastErr?.message || "unknown error"}`,
-  );
 }
 
 module.exports = { analyzeResume };

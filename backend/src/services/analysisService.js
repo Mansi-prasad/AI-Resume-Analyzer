@@ -1,8 +1,7 @@
 const Analysis = require("../models/Analysis.js");
 const { analyzeResume } = require("./geminiService.js");
 const { loadOwnResume, loadVersion } = require("./resumeService.js");
-const  ApiError  = require("../utils/ApiError.js");
-const { rewriteBody } = require("../validators/analysisValidator.js");
+const ApiError = require("../utils/ApiError.js");
 
 // Analyze a resume version and save the result.
 const createAnalysis = async ({ req, versionId, targetRole }) => {

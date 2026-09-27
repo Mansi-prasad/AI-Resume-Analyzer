@@ -294,7 +294,7 @@ function PreviewLabel({ children }) {
 }
 
 function ParsedSectionsPreview({ version }) {
-  const s = version.parsedSections || {};
+  const s = version.parsedSections || version.parsedSection || {};
   const b = s.basics || {};
 
   return (

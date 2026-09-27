@@ -16,12 +16,12 @@ module.exports = {
   mongoUri: process.env.MONGO_URI,
   jwtSecret: process.env.JWT_SECRET,
   jwtExpiresIn: process.env.JWT_EXPIRES_IN || "7d",
-  cookieName: process.env.COOKIE_NAME,
+  cookieName: process.env.COOKIE_NAME || "ai_resume_analyzer_token",
   clientOrigins: (process.env.CLIENT_ORIGIN || "http://localhost:5173")
     .split(",")
     .map((o) => o.trim())
     .filter(Boolean),
   geminiApiKey: process.env.GEMINI_API_KEY || "",
-  geminiModel: process.env.GEMINI_MODEL || "",
+  geminiModel: process.env.GEMINI_MODEL || "gemini-2.0-flash",
   isProd: process.env.NODE_ENV === "production",
 };

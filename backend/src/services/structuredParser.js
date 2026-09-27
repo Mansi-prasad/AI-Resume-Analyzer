@@ -1,15 +1,7 @@
-const { GoogleGenAI, Type } = require("@google/genai");
-const { z, string } = require("zod");
+const { Type } = require("@google/genai");
+const { z } = require("zod");
 
-const env = require("../config/env.js");
-
-const ai = env.geminiApiKey
-  ? new GoogleGenAI({ apiKey: env.geminiApiKey })
-  : null;
-
-if (!ai) {
-  throw ApiError.internal("GEMINI_API_KEY is not configured on the server.");
-}
+const { ai, generateContent } = require("./geminiClient.js");
 const linkSchema = {
   type: Type.OBJECT,
   required: ["label", "url"],
@@ -74,7 +66,7 @@ const responseSchema = {
         },
       },
     },
-    skill: { type: Type.ARRAY, items: { type: Type.STRING } },
+    skills: { type: Type.ARRAY, items: { type: Type.STRING } },
     projects: {
       type: Type.ARRAY,
       items: {
@@ -84,7 +76,7 @@ const responseSchema = {
           name: { type: Type.STRING },
           description: { type: Type.STRING },
           tech: { type: Type.ARRAY, items: { type: Type.STRING } },
-          link: { type: Type.ARRAY, items: linkSchema },
+          links: { type: Type.ARRAY, items: linkSchema },
         },
       },
     },
@@ -145,7 +137,7 @@ const validator = z.object({
       z.object({
         name: z.string().default(""),
         description: z.string().default(""),
-        tech: z.string().default(""),
+        tech: z.array(z.string()).default([]),
         links: z
           .array(z.object({ label: z.string(), url: z.string() }))
           .default([]),
@@ -217,33 +209,21 @@ async function parseResume(rawText) {
 
   const prompt = buildPrompt(rawText);
 
-  for (let attempt = 1; attempt <= 2; attempt++) {
-    try {
-      const result = await ai.models.generateContent({
-        model: env.geminiModel,
-        contents: [{ role: "user", parts: [{ text: prompt }] }],
-        config: {
-          responseMimeType: "application/json",
-          responseSchema,
-          temperature: 0.1,
-        },
-      });
-
-      const text =
-        typeof result.text === "function" ? result.text() : result.text();
-
-      if (!text) throw new Error("Empty response");
-
-      const parsed = JSON.parse(text);
-      return validator.parse(parsed);
-    } catch (error) {
-      if (attempt === 2) {
-        console.error("Structured parse failed: ", error.message);
-        return EMPTY;
-      }
-    }
+  try {
+    const { text } = await generateContent({
+      contents: [{ role: "user", parts: [{ text: prompt }] }],
+      config: {
+        responseMimeType: "application/json",
+        responseSchema,
+        temperature: 0.1,
+      },
+    });
+    const parsed = JSON.parse(text);
+    return validator.parse(parsed);
+  } catch (error) {
+    console.error("Structured parse failed: ", error.message);
+    return EMPTY;
   }
-  return EMPTY;
 }
 
 module.exports = { parseResume };

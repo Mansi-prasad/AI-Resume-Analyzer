@@ -12,7 +12,7 @@ const getVersions = asyncHandler(async (req, res) => {
   const resumeMap = new Map(resumes.map((r) => [r._id.toString(), r]));
 
   const versions = await ResumeVersion.find({
-    resumeId: { $$in: resumeIds },
+    resumeId: { $in: resumeIds },
   })
     .select(
       "_id resumeId label versionNumber sourceType createdAt latestAnalysisId parentVersionId",
@@ -29,7 +29,7 @@ const getVersions = asyncHandler(async (req, res) => {
     : [];
 
   const scoreByVersion = new Map(
-    analyses.map((a) => [a.versionId.toString().a.atsScore]),
+    analyses.map((a) => [a.versionId.toString(), a.atsScore]),
   );
 
   const items = versions.map((v) => {
@@ -48,11 +48,9 @@ const getVersions = asyncHandler(async (req, res) => {
   });
 
   const totals = {
-    all: DataTransferItemList.length,
-    uploads: DataTransferItemList.filter((i) => i.sourceType === "upload")
-      .length,
-    rewrites: DataTransferItemList.filter((i) => i.sourceType === "rewrite")
-      .length,
+    all: items.length,
+    uploads: items.filter((i) => i.sourceType === "upload").length,
+    rewrites: items.filter((i) => i.sourceType === "rewrite").length,
   };
 
   res.json({ versions: items, totals });

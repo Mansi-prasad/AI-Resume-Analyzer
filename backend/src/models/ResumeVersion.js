@@ -88,7 +88,7 @@ const resumeVersionSchema = new mongoose.Schema(
     versionNumber: { type: Number, required: true, min: 1 },
     label: { type: String, required: true },
     rawText: { type: String, required: true },
-    parsedSection: { type: parsedSectionSchema, default: () => ({}) },
+    parsedSections: { type: parsedSectionSchema, default: () => ({}) },
     sourceType: {
       type: String,
       enum: ["upload", "rewrite"],

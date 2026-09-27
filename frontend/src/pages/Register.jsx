@@ -65,7 +65,7 @@ export default function Register() {
             autoComplete="name"
             value={form.name}
             onChange={(v) => setForm({ ...form, name: v })}
-            placeholder="Ada Lovelace"
+            placeholder="Mansi"
             icon={User}
           />
 
