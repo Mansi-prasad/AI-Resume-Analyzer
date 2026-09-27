@@ -6,7 +6,9 @@ const requiredEnvVars = ["MONGO_URI", "JWT_SECRET"];
 
 const missing = requiredEnvVars.filter((key) => !process.env[key]);
 if (missing.length) {
-  console.error(`Missing required environment variables: ${missing.join(", ")}`);
+  console.error(
+    `Missing required environment variables: ${missing.join(", ")}`,
+  );
   process.exit(1);
 }
 
@@ -22,6 +24,6 @@ module.exports = {
     .map((o) => o.trim())
     .filter(Boolean),
   geminiApiKey: process.env.GEMINI_API_KEY || "",
-  geminiModel: process.env.GEMINI_MODEL || "gemini-2.0-flash",
+  geminiModel: process.env.GEMINI_MODEL || "gemini-3.8-flash",
   isProd: process.env.NODE_ENV === "production",
 };

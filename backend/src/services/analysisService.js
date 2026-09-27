@@ -19,6 +19,7 @@ const createAnalysis = async ({ req, versionId, targetRole }) => {
   // Send the extracted resume text to Gemini.
   const { analysis, model, promptTokens, responseTokens } = await analyzeResume(
     {
+      parsedSections: version.parsedSections,
       rawText: version.rawText,
       targetRole,
     },

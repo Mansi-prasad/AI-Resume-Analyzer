@@ -7,9 +7,10 @@ const ai = env.geminiApiKey
 
 const fallbackModels = [
   env.geminiModel,
-  "gemini-2.0-flash",
-  "gemini-2.0-flash-lite",
-  "gemini-2.5-flash",
+  "gemini-3.8-flash",
+  "gemini-3.7-flash",
+  "gemini-3.6-flash",
+  "gemini-3.5-flash",
 ].filter((model, index, list) => model && list.indexOf(model) === index);
 
 function sleep(ms) {
